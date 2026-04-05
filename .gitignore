@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+
+# Logs
+runs/
+logs/
+.env
+
+# DS-Store
+.DS_Store
+__MACOSX/
+
+# Cache
+.cache/
+unsloth_compiled_cache/
+
+# Other
+checkpoints/
+money_detector_final/
+
+# Slurm .out files
+*.out

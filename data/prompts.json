@@ -1,0 +1,43 @@
+{
+  "stage_1": {
+    "system": "You generate realistic sentences containing money amounts for a financial NER training dataset.\nUse the placeholder <MONEY> wherever a money amount should appear.\n\nMoney formats to cover across sentences:\n- Symbol-prefixed amounts: $1,234.56 / \u20ac3,200 / \u00a31,750 / \u00a5120,000 / \u20b9850,000 / \u20bf0.25\n- ISO code prefix: USD 50,000 / AUD 15,000 / CHF 486.50\n- ISO code suffix: 1,234 USD / 50,000 EUR\n- Shorthand: $1.2M / 500K / 2.5B\n- Written-out: $25 million / 3.5 billion dollars\n- Bare numbers in monetary context: earned 850,000 per year\n\nRules:\n- Each sentence MUST contain 1-2 <MONEY> placeholders\n- Do NOT write actual dollar amounts, only <MONEY>\n- Write varied, natural sentences mixing formal and informal registers\n- Include surrounding non-money numbers where natural (dates, percentages, quantities)\n- One sentence per line, no numbering, no bullets\n- Output exactly 20 sentences, nothing else",
+    "domains": [
+      "Write sentences about bank wire transfers, remittances, SWIFT MT103 messages, and payment confirmations between individuals and companies. Reference sender/beneficiary fields, transaction IDs, and settlement dates.",
+      "Write sentences about corporate quarterly earnings, revenue reports, operating expenses, EBITDA, and profit margins. Include year-over-year comparisons with percentages.",
+      "Write sentences about invoices, billing statements, accounts receivable, and purchase orders. Include invoice numbers, due dates, and line item descriptions.",
+      "Write sentences about regulatory compliance, AML transaction thresholds, KYC fines, sanctions screening results, and legal settlements in financial institutions.",
+      "Write sentences about loan applications, mortgage payments, interest rates, credit lines, and debt servicing. Mix consumer and commercial lending contexts.",
+      "Write sentences about investment portfolios, stock trades, fund NAV, margin calls, and brokerage account activity. Include ticker symbols and trade dates.",
+      "Write sentences about insurance claims, premium payments, coverage limits, deductibles, and policy payouts across health, auto, and property insurance.",
+      "Write sentences about tax returns, withholding amounts, refunds, estimated payments, and audit assessments. Reference form numbers and filing deadlines.",
+      "Write sentences about casual Slack or Teams messages between coworkers discussing expense reports, reimbursements, team budgets, and vendor payments.",
+      "Write sentences about personal finance texts or chat messages discussing rent, savings goals, splitting bills, Venmo/Zelle transfers, and budgeting apps.",
+      "Write sentences about international trade invoices and cross-border payments using EUR, GBP, JPY, AUD, CHF, INR, CNY, NZD, and other non-USD currencies.",
+      "Write sentences about cryptocurrency transactions mixing BTC, ETH, and stablecoin amounts alongside fiat currency values. Include wallet addresses and gas fees.",
+      "Write sentences about financial news headlines and analyst reports using shorthand notation: millions, billions, K/M/B suffixes, and approximate figures.",
+      "Write sentences about structured payment messages with sender and beneficiary fields, IBAN numbers, BIC/SWIFT codes, and remittance information fields.",
+      "Write sentences about salary negotiations, job offers, compensation packages, stock options, signing bonuses, and annual performance reviews.",
+      "Write sentences about real estate transactions: home prices, down payments, closing costs, property taxes, rental income, and appraisal values.",
+      "Write sentences about e-commerce and retail: shopping cart totals, discount codes, shipping costs, refund amounts, and subscription pricing.",
+      "Write sentences about nonprofit fundraising: donation amounts, grant applications, endowment values, campaign goals, and matching gift programs.",
+      "Write sentences about government budgets, public spending, infrastructure project costs, defense appropriations, and social program funding.",
+      "Write sentences about healthcare billing: medical procedure costs, copays, insurance reimbursements, out-of-pocket maximums, and prescription drug prices."
+    ]
+  },
+  "stage_2": {
+    "system": "You are given a sentence containing money amount placeholders marked as <MONEY>.\nYour task is to rewrite the sentence by adding 1-3 NON-MONEY numerical details around the existing text.\n\nAdd things like:\n- Percentages: up 12% from last quarter, a 3.5% increase\n- Dates: on March 15, 2024, filed January 30\n- Reference numbers: invoice #48293, account ending in 7842, order ID 9301847\n- Quantities: across 15 departments, for 3,000 employees, 47 line items\n- Durations: over the past 10 years, within 5 business days\n- Measurements: 10,000 square feet, 500 miles\n- Phone/fax numbers in contact contexts\n\nThese additions create hard negatives that teach the model to distinguish money from non-money numbers.\n\nRules:\n- Do NOT remove or change any <MONEY> placeholder\n- Do NOT add new <MONEY> placeholders\n- Keep the sentence natural and coherent\n- Return ONLY the rewritten sentence, nothing else"
+  },
+  "stage_4": {
+    "system": "Generate realistic sentences containing numbers, symbols, or patterns that closely resemble money amounts but are definitively NOT money.\n\nTarget these specific confusable patterns:\n- Race distances: ran a 10K, completed the 5K in 22 minutes\n- Dollar sign in code/math: $ in bash variables, LaTeX math mode ($x^2$), regex patterns\n- SEC filings: filed their 10-K, quarterly 10-Q, form 8-K disclosure\n- Percentages that look like prices: grew 15%, yield of 4.5%\n- Large plain numbers: population of 10,000, processed 500,000 records\n- Phone numbers and zip codes: call 1-800-555-0199, zip 90210\n- Scores and ratings: rated 4.5/5 stars, scored 98 out of 100\n- Version numbers: upgraded to v3.5, Python 3.12\n- Dates with numbers: March 15, 2024, fiscal year 2023\n- Measurements: 10,000 square feet, 5,000 meters, 100 degrees\n- Employee/account IDs: employee #48293, badge 7842\n\nRules:\n- ZERO actual money amounts in any sentence\n- Sentences must be realistic and natural\n- One sentence per line, no numbering\n- Output exactly 20 sentences, nothing else",
+    "domains": [
+      "Context: software engineering, DevOps, and data science. Code reviews, bash scripts, regex patterns, LaTeX documents, API rate limits, error codes, file sizes, and database row counts.",
+      "Context: athletic events and fitness. Marathon times, 5K and 10K race results, step counts, calorie burns, heart rate zones, and training distances.",
+      "Context: SEC regulatory filings. Annual 10-K reports, quarterly 10-Q filings, form 8-K disclosures, proxy statements, and earnings call transcripts with non-monetary metrics.",
+      "Context: data analysis and business intelligence. Growth percentages, conversion rates, population figures, survey sample sizes, and statistical measures.",
+      "Context: everyday life and communication. Phone numbers, street addresses, zip codes, dates, appointment times, and social media metrics like follower counts.",
+      "Context: product reviews and technology. Star ratings, version numbers, benchmark scores, battery percentages, storage capacities, and pixel counts.",
+      "Context: science, medicine, and engineering. Dosages in mg, temperatures in Celsius/Fahrenheit, blood pressure readings, lab results, and chemical concentrations.",
+      "Context: HR, operations, and logistics. Employee ID numbers, badge numbers, headcount figures, shift schedules, inventory counts, and tracking numbers."
+    ]
+  }
+}

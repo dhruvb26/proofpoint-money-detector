@@ -1,0 +1,35 @@
+name: money-detector
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+
+  - numpy<2
+  - pandas
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - tqdm
+
+  - pip
+  - pip:
+    - --extra-index-url https://download.pytorch.org/whl/cu126
+    - torch
+    - torchvision
+    - torchaudio
+
+    - transformers>=4.40.0
+    - datasets>=2.18.0
+    - accelerate>=0.27.0
+    - tokenizers>=0.15.0
+
+    - seqeval>=1.2.2
+    - spacy>=3.7.0
+    - pytorch-crf>=0.7.2
+
+    - faker>=24.0.0
+    - vllm
+
+    - sentencepiece>=0.2.0
