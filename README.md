@@ -1,7 +1,5 @@
 # Proofpoint Money Detector THC
 
-## HTC Environment
-
 This repo is designed to run on an HTC cluster. System used:
 
 - **OS:** Rocky Linux 8.10
@@ -10,7 +8,44 @@ This repo is designed to run on an HTC cluster. System used:
 - **GPU:** NVIDIA A100-SXM4-80GB
 - **CUDA:** 12.6 (`module load cuda-12.6.1-gcc-12.1.0`)
 
-Make sure to run - `python -m spacy download en_core_web_lg -q` to download the spaCy model.
+### File Structure
+
+```
+├── main.py                  # Training + evaluation
+├── generate_data.py         # Synthetic data generation 
+├── environment.yml          # Conda environment spec
+├── data/
+│   ├── prompts.json         
+│   └── synthetic_dataset.json
+└── assets/                  
+```
+
+### Setup & Running
+
+```bash
+module load cuda-12.6.1-gcc-12.1.0
+conda env create -f environment.yml
+conda activate money-detector
+python -m spacy download en_core_web_lg -q
+```
+
+Generate synthetic data:
+
+```bash
+python generate_data.py
+```
+
+Train and evaluate the model:
+
+```bash
+python main.py
+```
+
+Run evaluation only (loads saved model from `money_detector_final/`):
+
+```bash
+python main.py --eval-only
+```
 
 ## Overview
 
